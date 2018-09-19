@@ -19,4 +19,7 @@ export const Domain = "";
 //heroku config:set NODE_ENV=production
 //git push heroku master
 
+//7) to clear buildpacks if react is to be added on top of a node.js deployment, run:
+//heroku buildpacks:clear
+
 //https://daveceddia.com/deploy-react-express-app-heroku/
