@@ -46,20 +46,24 @@ app.get("/test", (req, res) => res.json({ msg: "hello my name is" }));
 app.use("/users", users);
 app.use("/posts", posts);
 
-app.get("/", passport.authenticate("jwt", { session: false }), (req, res) => {
-  Post.find(
-    { userid: req.user.following },
-    null,
-    { sort: { date: -1 } },
-    (err, posts) => {
-      if (err) {
-        return res.status(400).json({ message: "No posts to display" });
-      }
+app.get(
+  "/posts",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.find(
+      { userid: req.user.following },
+      null,
+      { sort: { date: -1 } },
+      (err, posts) => {
+        if (err) {
+          return res.status(400).json({ message: "No posts to display" });
+        }
 
-      return res.status(200).json(posts);
-    }
-  );
-}); //else will send unauthorized
+        return res.status(200).json(posts);
+      }
+    );
+  }
+); //else will send unauthorized
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

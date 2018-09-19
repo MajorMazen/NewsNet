@@ -15,7 +15,7 @@ this.PostGet = new PostGet();
 
 //only needed if follow/unfollow is on same page, posts are 'unshifted' or 'spliced' in response, also myfollowing (re-render)
 export const getPosts = () => dispatch => {
-  const posts = this.PostGet.safeGet(Domain + "/"); //home page, posts of ppl which the user is following
+  const posts = this.PostGet.safeGet(Domain + "/posts"); //home page, posts of ppl which the user is following
 
   posts
     .then(posts => {

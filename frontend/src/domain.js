@@ -4,8 +4,8 @@ export const Domain = "";
 //1) set Domain= "" if hosted on heroku, the local proxy in react package.json should be removed
 //2) add the keys_dev to the gitignore in the express server if it's to be posted on heroku, while setting the config vars on heroku instead
 //3) the server should be at the root folder
-//4) the frontend build path should be called in the server.js ('npm run build' the frontend)
-//5) the server package.json should have a postbuild item ("heroku-postbuild": "cd frontend && npm && npm run build")
+//4) the frontend build path should be called in the server.js (app.use(express.static(path.join(__dirname, "frontend/build")));)
+//5) the server package.json should have a postbuild item ("heroku-postbuild": "cd frontend && npm install && npm run build")
 //6)
 
 //cd .. (to the root)
