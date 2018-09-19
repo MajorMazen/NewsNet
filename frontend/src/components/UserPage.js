@@ -3,7 +3,7 @@ import PostsOfLink from "./PostsOfLink";
 import PostGet from "../network/PostGet";
 import UserNavBar from "./UserNavBar";
 import AuthService from "../network/AuthService";
-import { withRouter } from "react-router";
+import { Redirect } from "react-router-dom";
 import { Domain } from "../domain";
 
 class UserPage extends Component {
@@ -13,6 +13,7 @@ class UserPage extends Component {
     this.PostGet = new PostGet();
     this.AuthService = new AuthService();
     this.domain = Domain;
+    this.id = this.AuthService.getUserInfo().id;
 
     this.state = {
       name_error: false,
@@ -22,27 +23,24 @@ class UserPage extends Component {
   }
 
   componentDidMount = async () => {
-    const id = this.AuthService.getUserInfo().id;
-    console.log(id);
-    console.log(this.this.props.match.params.id);
-    if (id === this.this.props.match.params.id) {
-      this.props.history.push("/me");
-    } else {
-      try {
-        //get user name
-        const username = await this.PostGet.safeGet(
-          this.domain + "/users/name/" + this.props.match.params.id
-        ); //get user name
-        this.setState({
-          name_error: false,
-          username: username.name
-        });
-      } catch (e) {
-        this.setState({
-          name_error: true,
-          name_errormsg: "Profile fetch error"
-        });
-      }
+    if (this.id === this.props.match.params.id) {
+      return;
+    }
+
+    try {
+      //get user name
+      const username = await this.PostGet.safeGet(
+        this.domain + "/users/name/" + this.props.match.params.id
+      ); //get user name
+      this.setState({
+        name_error: false,
+        username: username.name
+      });
+    } catch (e) {
+      this.setState({
+        name_error: true,
+        name_errormsg: "Profile fetch error"
+      });
     }
   };
 
@@ -52,7 +50,11 @@ class UserPage extends Component {
 
   render() {
     //needed if user types in the link to user profile instead of press on user name (passing username as a given value)
-    if (this.state.name_error) {
+    if (this.id === this.props.match.params.id) {
+      return <Redirect to="/me" />;
+    }
+    ///
+    else if (this.state.name_error) {
       return (
         <div className="alert alert-danger" role="alert">
           {this.state.name_errormsg}
@@ -75,4 +77,4 @@ class UserPage extends Component {
   }
 }
 
-export default withRouter(UserPage);
+export default UserPage;

@@ -1,13 +1,14 @@
-//export const Domain = "http://localhost:5000";
+//export const Domain = "http://localhost:5000"; //just set this to go back to local
 export const Domain = "";
 
+//steps for heroku deployment
 //1) set Domain= "" if hosted on heroku, the local proxy in react package.json should be removed
-//2) add the keys_dev to the gitignore in the express server if it's to be posted on heroku, while setting the config vars on heroku instead
+//2) add the keys_dev to the gitignore in the express server if it's to be posted on heroku, while setting the config vars on heroku instead (in (7))
 //3) the server should be at the root folder
 //4) the frontend build path should be called in the server.js (app.use(express.static(path.join(__dirname, "frontend/build")));)
 //5) the server package.json should have a postbuild item ("heroku-postbuild": "cd frontend && npm install && npm run build")
 //6) the serve should NOT have an api link "/" if reserved at the react frontend (and consequently loaded by heroku)
-//7)
+//7) in console, type:
 
 //cd .. (to the root)
 //git init
