@@ -6,7 +6,8 @@ export const Domain = "";
 //3) the server should be at the root folder
 //4) the frontend build path should be called in the server.js (app.use(express.static(path.join(__dirname, "frontend/build")));)
 //5) the server package.json should have a postbuild item ("heroku-postbuild": "cd frontend && npm install && npm run build")
-//6)
+//6) the serve should NOT have an api link "/" if reserved at the react frontend (and consequently loaded by heroku)
+//7)
 
 //cd .. (to the root)
 //git init
@@ -19,7 +20,7 @@ export const Domain = "";
 //heroku config:set NODE_ENV=production
 //git push heroku master
 
-//7) to clear buildpacks if react is to be added on top of a node.js deployment, run:
+//8) to clear buildpacks if react is to be added on top of a node.js deployment, run:
 //heroku buildpacks:clear
 
 //https://daveceddia.com/deploy-react-express-app-heroku/

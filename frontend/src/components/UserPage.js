@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PostsOfLink from "./PostsOfLink";
 import PostGet from "../network/PostGet";
 import UserNavBar from "./UserNavBar";
+import AuthService from "../network/AuthService";
+import { withRouter } from "react-router";
 import { Domain } from "../domain";
 
 class UserPage extends Component {
@@ -9,6 +11,7 @@ class UserPage extends Component {
     super(props);
 
     this.PostGet = new PostGet();
+    this.AuthService = new AuthService();
     this.domain = Domain;
 
     this.state = {
@@ -19,20 +22,25 @@ class UserPage extends Component {
   }
 
   componentDidMount = async () => {
-    try {
-      //get user name
-      const username = await this.PostGet.safeGet(
-        this.domain + "/users/name/" + this.props.match.params.id
-      ); //get user name
-      this.setState({
-        name_error: false,
-        username: username.name
-      });
-    } catch (e) {
-      this.setState({
-        name_error: true,
-        name_errormsg: "Profile fetch error"
-      });
+    const id = this.AuthService.getUserInfo().id;
+    if (id === this.this.props.match.params.id) {
+      this.props.history.push("/me");
+    } else {
+      try {
+        //get user name
+        const username = await this.PostGet.safeGet(
+          this.domain + "/users/name/" + this.props.match.params.id
+        ); //get user name
+        this.setState({
+          name_error: false,
+          username: username.name
+        });
+      } catch (e) {
+        this.setState({
+          name_error: true,
+          name_errormsg: "Profile fetch error"
+        });
+      }
     }
   };
 
@@ -65,4 +73,4 @@ class UserPage extends Component {
   }
 }
 
-export default UserPage;
+export default withRouter(UserPage);
