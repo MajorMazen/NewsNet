@@ -23,6 +23,8 @@ class UserPage extends Component {
 
   componentDidMount = async () => {
     const id = this.AuthService.getUserInfo().id;
+    console.log(id);
+    console.log(this.this.props.match.params.id);
     if (id === this.this.props.match.params.id) {
       this.props.history.push("/me");
     } else {
