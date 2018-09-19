@@ -1,7 +1,7 @@
 //export const Domain = "http://localhost:5000";
 export const Domain = "";
 
-//1) set Domain= "" if hosted on heroku, the proxy in react package.json will be ignored by heroku
+//1) set Domain= "" if hosted on heroku, the local proxy in react package.json should be removed
 //2) add the keys_dev to the gitignore in the express server if it's to be posted on heroku, while setting the config vars on heroku instead
 //3) the server should be at the root folder
 //4) the frontend build path should be called in the server.js ('npm run build' the frontend)
