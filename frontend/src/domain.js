@@ -1,11 +1,14 @@
 //export const Domain = "http://localhost:5000";
 export const Domain = "";
-//or Domain= "" if hosted on heroku, the proxy in react package.json will be ignored by heroku
-//add the keys_dev to the gitignore in the express server if it's to be posted on heroku, while setting the config vars on heroku instead
-//the server should be at the root folder
-//the frontend build should be called in the server.js
 
-//cd ..
+//1) set Domain= "" if hosted on heroku, the proxy in react package.json will be ignored by heroku
+//2) add the keys_dev to the gitignore in the express server if it's to be posted on heroku, while setting the config vars on heroku instead
+//3) the server should be at the root folder
+//4) the frontend build path should be called in the server.js ('npm run build' the frontend)
+//5) the server package.json should have a postbuild item ("heroku-postbuild": "cd frontend && npm && npm run build")
+//6)
+
+//cd .. (to the root)
 //git init
 //git add .
 //git commit -m "heroku version"
@@ -15,3 +18,5 @@ export const Domain = "";
 //heroku config:set SECRET=hjhjhjggdrdrsmklmoojoijihiuhu
 //heroku config:set NODE_ENV=production
 //git push heroku master
+
+//https://daveceddia.com/deploy-react-express-app-heroku/

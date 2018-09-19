@@ -11,8 +11,7 @@ const Post = require("./models/Post");
 const cors = require("cors");
 // Allowing private routes (users should be logged in with a valid token to view)
 const passport = require("passport");
-const path = require('path');
-
+const path = require("path");
 
 //start the server
 const app = express();
@@ -61,6 +60,12 @@ app.get("/", passport.authenticate("jwt", { session: false }), (req, res) => {
     }
   );
 }); //else will send unauthorized
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
+});
 
 const port = process.env.PORT || 5000;
 
